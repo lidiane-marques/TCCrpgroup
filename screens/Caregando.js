@@ -1,6 +1,10 @@
 import React from 'react'
 import {  StyleSheet, Text,  View,  ActivityIndicator} from "react-native";
 import * as firebase from 'firebase'
+
+import Fire from '../fire'
+
+
 export default class Caregando extends React.Component{
 componentDidMount(){
 firebase.auth().onAuthStateChanged(user =>{

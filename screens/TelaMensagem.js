@@ -11,7 +11,7 @@ LayoutAnimation,
   Keyboard,
 } from "react-native";
 import * as firebase from 'firebase'
-export default class TelaHome extends React.Component{
+export default class TelaMensagem extends React.Component{
 
   state={
     email:"",
@@ -21,20 +21,14 @@ export default class TelaHome extends React.Component{
     const {email, displayName} = firebase.auth().currentUser
     this.setState({email, displayName})
   }
-
-  signOutUser = () => {
-    firebase.auth().signOut()
-  }
   
 render(){
   LayoutAnimation.easeInEaseOut()
+  console.log(this.state.displayName) 
       return(
         <View style={styles.container}>
-          <Text>oi {this.state.email}</Text>
-          <TouchableOpacity style={{marginTop:32}} onPress={this.signOutUser}>
-            <Text>sair</Text>
-          </TouchableOpacity>
-          </View>
+          <Text>oi essa é tela de msg</Text> 
+     </View>
       )
 
     }

@@ -7,18 +7,44 @@ import {
   TextInput,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  Dimensions,
+ StatusBar,
   Keyboard,
 } from "react-native";
+import Icon from "react-native-vector-icons/Feather"
 import * as firebase from 'firebase'
+import * as pickImage from 'expo-image-picker'
+import  usePermissions from '../screens/a';
 
 export default class TelaCadastro extends React.Component{
+  static navigationOptions={
+    header: null
+  }
   state ={
-    name: "",
-    email:"",
-    password:"",
+    user:{
+      name: "",
+      email:"",
+      password:"",
+      avatar: null
+    },
+  
     erromsg: null
   }
+  headerPickAvatar= async() =>{
+    usePermissions.getCammeraPermission()
+  }
+
+    handlerPickAvatar = async() =>{
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.images,
+        allowsEditing: true,
+        aspect:[4,3]
+      })
+        if(!result.cancelled){
+          this.setState({user: { ...this.state.user, avatar:result.uri  }})
+        }
+    }
+
+
 
   cadastrar=()=>{
     
@@ -36,8 +62,21 @@ render(){
       return(
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View style={styles.container}>
-          <Text styles={styles.titulo}>RPGROUP</Text>
-          <View styles={styles.erromsg}>
+        <StatusBar barStyle="light-content"></StatusBar>
+        <Image source={require("../assets/logo2.png")}
+        styles={{marginTop:5, marginLeft:60}}
+        ></Image>
+        <TouchableOpacity style={styles.voltar} onPress={() => this.props.navigation.goBack()}>
+            <Icon name=" arrow-round-back" size={32} color= "#ff4500"/>
+        </TouchableOpacity>
+        <View style={{position:"absolute", top: 64 ,alignItems:"center", width :"100%"}}>
+        <TouchableOpacity style={styles.avatarplacrholder}>
+          <Image source={{uri: this.state.user.avatar}} style={styles.avatar}></Image>
+            <Icon name="add" size={40} color= "#ff4500"  style={{marginTop: 6, marginLeft: 2}}/>
+        </TouchableOpacity>
+        </View>
+          
+          <View style={styles.erromsg}>
           {this.state.errorMessage && <Text style={styles.error}>{this.state.errorMessage}</Text>}
           </View>
           <View style={styles.formulario}> 
@@ -124,7 +163,7 @@ render(){
             marginHorizontal: 30
           },
           formulario:{
-            marginBottom: 40,
+            marginBottom: -40,
             marginHorizontal: 30,
           },
           inputtext:{
@@ -146,6 +185,38 @@ render(){
             alignItems:"center",
             justifyContent:"center",
             marginHorizontal: 40
+          },
+          voltar:{
+            position:"absolute",
+            top:40,
+            left:32,
+            width: 32,
+            height:32,
+            borderRadius: 16,
+            backgroundColor: "rgba(21, 22,40,0.1)",
+            alignItems:"center",
+            justifyContent:"center",
+          },
+          avatar:{
+            position:"absolute",
+            width: 100,
+            height: 100,
+            borderRadius: 50, 
+            backgroundColor: "#e1e2e6",
+              marginTop: 180 ,
+              justifyContent:"center",
+              alignItems:"center",
+          },
+          Avatarplacrholder:{
+            width: 100,
+            height: 100,
+            backgroundColor:"#e1e2e6",
+            borderRadius: 50,
+            marginTop: 48,
+            justifyContent: "center",
+            alignItems:"center",
           }
+
+
 
  })

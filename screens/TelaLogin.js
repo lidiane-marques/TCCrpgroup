@@ -31,15 +31,16 @@ export default class TelaLogin extends React.Component{
     .catch(error =>this.setState({errorMessage: error.message}))
   }
 render(){
+  LayoutAnimation.easeInEaseOut();
       return(
        
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View style={styles.container}>
-        <StatusBar barStyle='light-content'></StatusBar>
+        <StatusBar barStyle="light-content"></StatusBar>
         <Image source={require("../assets/logo2.png")}
-        style={{marginTop:50, marginLeft:60}}
+        style={{marginTop:-50, marginLeft:60}}
         ></Image>
-          <Text styles={styles.greeting}>{'Bem vindo a\nRPGROUP'}</Text>
+          
           <View styles={styles.erromsg}>
           {this.state.errorMessage && <Text style={styles.error}>{this.state.errorMessage}</Text>}
           </View>
@@ -72,7 +73,7 @@ render(){
                 </TouchableOpacity>
                 <TouchableOpacity style={{alignSelf: "center", marginTop: 30}} 
                 onPress={() => this.props.navigation.navigate("Cadastro")}>
-                  <Text styles={{color:"#000"}}>Não tem uma conta?<Text styles={{color:"blue"}}>{'\n      Crie uma nova!'}</Text> </Text>
+                  <Text style={{color:"#000"}}>Não tem uma conta?<Text style={{color:"blue"}}>{'\n      Crie uma nova!'}</Text> </Text>
                 </TouchableOpacity>
 
           </View>
@@ -85,8 +86,7 @@ render(){
 }
  const styles= StyleSheet.create({
           container:{
-            flex:1,
-           
+            flex:1
             
           },
           greeting:{
@@ -100,6 +100,7 @@ render(){
             color: "#e9446a",
             fontWeight: "600",
             textAlign:"center",
+            marginBottom:32
           },
           erromsg:{
             height: 72,
@@ -108,7 +109,7 @@ render(){
             marginHorizontal: 30
           },
           formulario:{
-            marginTop: 32,
+            marginTop: -10,
             marginBottom: 40,
             marginHorizontal: 30,
           },
