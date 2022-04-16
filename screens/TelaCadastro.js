@@ -13,7 +13,7 @@ import {
 import Icon from "react-native-vector-icons/Feather"
 import * as firebase from 'firebase'
 import * as pickImage from 'expo-image-picker'
-import  usePermissions from '../screens/a';
+import Contants from "expo-constants"
 
 export default class TelaCadastro extends React.Component{
   static navigationOptions={
@@ -29,9 +29,22 @@ export default class TelaCadastro extends React.Component{
   
     erromsg: null
   }
-  headerPickAvatar= async() =>{
-    usePermissions.getCammeraPermission()
+  componentDidMount(){
+    this.getPhotoPermision();
   }
+  
+  
+    getPhotoPermision = async() =>{
+      if (Contants.platform.ios){
+        const { status} = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+        if(status!= "granted"){
+          alert(" permite que o app acesse suas fotos");
+        }
+      }
+    }
+  //headerPickAvatar= async() =>{
+   // usePermissions.getCammeraPermission()
+ // }
 
     handlerPickAvatar = async() =>{
       let result = await ImagePicker.launchImageLibraryAsync({

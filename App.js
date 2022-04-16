@@ -26,8 +26,10 @@ import * as firebase from "firebase"
 
 
 const AppContainer = createStackNavigator(
+  
   {
-        default:createBottomTabNavigator(
+  
+    default:createBottomTabNavigator(
       {
             Home: {
              screen: TelaHome,
@@ -63,18 +65,21 @@ const AppContainer = createStackNavigator(
             } ,
         {
           defaultNavigationOptions:{
+            headerShown: null,
             tabBarOnPress:({navigation, defaultHandler})=>{
               if(navigation.state.key === "Post"){
                 navigation.navigate("postModal")
               } else{
                 defaultHandler()
               }
-            }
+              
+            },
+            
           },
           tabBarOptions:{
             activeTintColor: "#05A895B2",
             inactiveTintColor: "#8888c4",
-            headerShown: null
+            headerShown: false
           }
         }
      ),

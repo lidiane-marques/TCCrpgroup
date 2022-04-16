@@ -10,7 +10,7 @@ import {
 
 } from "react-native";
 import {Ionicons} from '@expo/vector-icons'
-import contants from "expo-constants"
+import Contants from "expo-constants"
 import * as Permissions from 'expo-permissions'
 import Fire from "../fire"
 import * as ImagePicker from 'expo-image-picker'
@@ -36,7 +36,7 @@ componentDidMount(){
 
 
   getPhotoPermision = async() =>{
-    if (contants.platform.ios){
+    if (Contants.platform.ios){
       const { status} = await Permissions.askAsync(Permissions.CAMERA_ROLL);
       if(status!= "granted"){
         alert(" permite que o app acesse suas fotos");
@@ -45,12 +45,13 @@ componentDidMount(){
 
   };
     handlerPost=()=>{
+      
       Fire.shared.addPost({text: this.state.text.trim(), localUri: this.state.image})
       .then(ref=>{this.setState({
         text: "",
        image: null
       })
-      console.log(image)
+      
     this.props.navigation.goBack()
     }).catch(error=>{
       alert(error)
@@ -62,7 +63,7 @@ componentDidMount(){
       let result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
-        aspect: [2,1]
+        aspect: [4,3]
       })
       if (!result.cancelled){
         this.setState({image: result.uri})
@@ -73,7 +74,7 @@ render(){
  
       return(
         <SafeAreaView style={styles.container}>
-          <View stile={styles.header}>
+          <View style={styles.header}>
             <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
               <Ionicons name="md-arrow-back" size={24} color ="#ff4500"/>
             </TouchableOpacity>
@@ -96,12 +97,13 @@ render(){
             </TextInput>
           </View>
           <TouchableOpacity  style={styles.fotos} onPress={this.pickImage}> 
-          <View style={{marginHorizontal:10, marginTop:10,height:10}}>
-            <Image source={{uri: this.state.image}} style={{width:"100%", height: "100%" }}></Image>
-          </View>
+         
           <Ionicons  name= "md-camera" size={32} color= "#ff4500"></Ionicons>
 
           </TouchableOpacity>
+          <View style={{marginHorizontal:20, marginTop:80,height:300}}>
+            <Image source={{uri: this.state.image}} style={{width:"100%", height: "100%" }}></Image>
+          </View>
           
      </SafeAreaView>
 
@@ -120,7 +122,7 @@ render(){
             flexDirection:"row",
             justifyContent:"space-between",
             paddingHorizontal:32,
-            paddingVertical:17,
+            paddingVertical:12,
             borderBottomWidth:1,
             borderBottomColor: "#05A895B2"
 

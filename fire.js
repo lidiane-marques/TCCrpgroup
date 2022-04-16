@@ -64,7 +64,7 @@ class Fire{
     return firebase.firestore()
   }
   get uid(){
-    return(firebase.auth().currentUser || {}.uid)
+    return(firebase.auth().currentUser || {}).uid
   }
   get timestamp(){
     return Date.now()
