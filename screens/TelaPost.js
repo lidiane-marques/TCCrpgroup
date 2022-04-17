@@ -27,13 +27,25 @@ require("firebase/firestore");
 export default class TelaPost extends React.Component{
 
  state={
+   user:{
+
+   },
     text:"",
     image: null
  }
+ unsubscribe = null
 
-componentDidMount(){
-  Permicao.getCammeraPermission()
-}
+
+ componentDidMount(){
+     const user= this.props.uid || Fire.shared.uid
+    this.unsubscribe= Fire.shared.firestore.collection("users").doc(user).onSnapshot(doc=>{
+       this.setState({user: doc.data()})
+     })
+ }
+ componentWillUnmount(){
+   this.unsubscribe();
+ }
+
 
 
  
@@ -69,14 +81,14 @@ render(){
         <SafeAreaView style={styles.container}>
           <View style={styles.header}>
             <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
-              <Ionicons name="md-arrow-back" size={24} color ="#ff4500"/>
+              <Ionicons name="md-arrow-back" size={32} color ="#ff4500"/>
             </TouchableOpacity>
             <TouchableOpacity onPress={this.handlerPost}>
               <Text style={{fontWeight:"400"}}>Post</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.inputcontainer}>
-            <Image source={require("../assets/user4.png")} style={styles.avatar}></Image>
+            <Image source={ this.state.user.avatar ? {uri: this.state.user.avatar} : require("../assets/user.jpg") } style={styles.avatar}></Image>
             <TextInput 
             autoFocus={true} 
             multiline={true} 
@@ -109,12 +121,13 @@ render(){
  const styles= StyleSheet.create({
           container:{
             flex:1,
+            marginTop:30
            
           },
           header:{
             flexDirection:"row",
             justifyContent:"space-between",
-            paddingHorizontal:32,
+            paddingHorizontal:30,
             paddingVertical:12,
             borderBottomWidth:1,
             borderBottomColor: "#05A895B2"

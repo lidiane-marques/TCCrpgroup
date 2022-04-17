@@ -61,11 +61,11 @@ const AppContainer = createStackNavigator(
               screen: TelaConfiguracao, 
               navigationOptions:{tabBarIcon: ({tintColor})  => <Icon name="settings" size ={24} color ={tintColor}/> 
                    }   
-              },
+              }
             } ,
         {
           defaultNavigationOptions:{
-            headerShown: null,
+         
             tabBarOnPress:({navigation, defaultHandler})=>{
               if(navigation.state.key === "Post"){
                 navigation.navigate("postModal")
@@ -79,18 +79,21 @@ const AppContainer = createStackNavigator(
           tabBarOptions:{
             activeTintColor: "#05A895B2",
             inactiveTintColor: "#8888c4",
-            headerShown: false
+            showLabel: false
           },
-          initialRouteName:"Perfil"
-        }
+        } 
      ),
+   
         postModal:{
           screen: TelaPost
         },
+
+      },
+      {
+
         mode:"modal",
-        headerMode:"false",
-        initialRouteName:"PostModal"
-        
+        headerMode:"none",
+       
         
    }
 )
