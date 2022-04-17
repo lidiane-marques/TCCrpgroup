@@ -70,8 +70,8 @@ export default class TelaHome extends React.Component{
 
             <Image source={post.image} style={styles.postimage} resizeMode= "cover"/>
             <View style={{flexDirection: "row"}}>
-              <Ionicons name="heart-outline" size ={24}  color= "#37888" style={{marginRight:16}}/>
-              <Ionicons name="chatbubbles" size ={24}  color= "#37888" />
+              <Ionicons name="heart-outline" size ={24}   style={{marginRight:16}}/>
+              <Ionicons name="chatbubbles" size ={24}   />
             </View>
           </View>
         </View>

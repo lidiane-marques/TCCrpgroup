@@ -14,6 +14,7 @@ import Contants from "expo-constants"
 import * as Permissions from 'expo-permissions'
 import Fire from "../fire"
 import * as ImagePicker from 'expo-image-picker'
+import Permicao from '../utils/Permicao'
 const firebase = require("firebase");
 // Required for side-effects
 require("firebase/firestore");
@@ -31,19 +32,11 @@ export default class TelaPost extends React.Component{
  }
 
 componentDidMount(){
-  this.getPhotoPermision();
+  Permicao.getCammeraPermission()
 }
 
 
-  getPhotoPermision = async() =>{
-    if (Contants.platform.ios){
-      const { status} = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-      if(status!= "granted"){
-        alert(" permite que o app acesse suas fotos");
-      }
-    }
-
-  };
+ 
     handlerPost=()=>{
       
       Fire.shared.addPost({text: this.state.text.trim(), localUri: this.state.image})

@@ -80,7 +80,8 @@ const AppContainer = createStackNavigator(
             activeTintColor: "#05A895B2",
             inactiveTintColor: "#8888c4",
             headerShown: false
-          }
+          },
+          initialRouteName:"Perfil"
         }
      ),
         postModal:{
@@ -105,7 +106,11 @@ const AuthStack= createStackNavigator({
   Cadastro: TelaCadastro,
  
  
-})
+},
+
+  
+    
+)
  export default createAppContainer(
    createSwitchNavigator(
      {

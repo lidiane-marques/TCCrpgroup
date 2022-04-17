@@ -10,14 +10,16 @@ import {
  StatusBar,
   Keyboard,
 } from "react-native";
+import Fire from '../fire'
 import Icon from "react-native-vector-icons/Feather"
 import * as firebase from 'firebase'
-import * as pickImage from 'expo-image-picker'
+import * as ImagePicker from 'expo-image-picker'
 import Contants from "expo-constants"
+import Permicao from '../utils/Permicao'
 
 export default class TelaCadastro extends React.Component{
   static navigationOptions={
-    header: null
+    headerShown: null
   }
   state ={
     user:{
@@ -29,9 +31,7 @@ export default class TelaCadastro extends React.Component{
   
     erromsg: null
   }
-  componentDidMount(){
-    this.getPhotoPermision();
-  }
+ 
   
   
     getPhotoPermision = async() =>{
@@ -42,34 +42,36 @@ export default class TelaCadastro extends React.Component{
         }
       }
     }
-  //headerPickAvatar= async() =>{
-   // usePermissions.getCammeraPermission()
- // }
+  handlerPickAvatar= async() =>{
+    Permicao.getCammeraPermission()
 
-    handlerPickAvatar = async() =>{
-      let result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.images,
-        allowsEditing: true,
-        aspect:[4,3]
-      })
-        if(!result.cancelled){
-          this.setState({user: { ...this.state.user, avatar:result.uri  }})
-        }
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4,3]
+    })
+    if(!result.cancelled){
+      this.setState({user: { ...this.state.user, avatar: result.uri}})
     }
+  }
+
+    
 
 
 
   cadastrar=()=>{
-    
+    Fire.shared.creaerUser(this.state.user)
 
-    firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
-    .then(userCredential => {
-      return userCredential.user.updateProfile({
-        displayName: this.state.name
-      })
-    })
 
-    .catch(error =>this.setState({errorMessage: error.message}))
+
+   // firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+  //  .then(userCredential => {
+    //  return userCredential.user.updateProfile({
+     //   displayName: this.state.name
+   //   })
+   // })
+
+   // .catch(error =>this.setState({errorMessage: error.message}))
   }
 render(){
       return(
@@ -80,12 +82,12 @@ render(){
         styles={{marginTop:5, marginLeft:60}}
         ></Image>
         <TouchableOpacity style={styles.voltar} onPress={() => this.props.navigation.goBack()}>
-            <Icon name=" arrow-round-back" size={32} color= "#ff4500"/>
+            <Icon name="chevron-left" size={32} color= "#ff4500"/>
         </TouchableOpacity>
         <View style={{position:"absolute", top: 64 ,alignItems:"center", width :"100%"}}>
-        <TouchableOpacity style={styles.avatarplacrholder}>
+        <TouchableOpacity style={styles.avatarplacrholder} onPress={this.handlerPickAvatar}>
           <Image source={{uri: this.state.user.avatar}} style={styles.avatar}></Image>
-            <Icon name="add" size={40} color= "#ff4500"  style={{marginTop: 6, marginLeft: 2}}/>
+            <Icon name="plus" size={40} color= "#ff4500"  style={{marginTop: 6, marginLeft: 2}}/>
         </TouchableOpacity>
         </View>
           
@@ -98,8 +100,8 @@ render(){
                   <TextInput
                    style={styles.input}
                    autoCapitalize="none"
-                   onChangeText={nome=>this.setState({ nome})}
-                   value={this.state.nome}
+                   onChangeText={name=>this.setState({ user:{...this.state.user, name}})}
+                   value={this.state.user.name}
                    
                  />
                 </View>
@@ -109,8 +111,8 @@ render(){
                   <TextInput
                    style={styles.input}
                    autoCapitalize="none"
-                   onChangeText={email=>this.setState({ email})}
-                   value={this.state.email}
+                   onChangeText={email=>this.setState({ user: {...this.state.user, email}})}
+                   value={this.state.user.email}
                  
                    
                  />
@@ -121,8 +123,8 @@ render(){
                   <TextInput
                    style={styles.input}
                    autoCapitalize="none"
-                   onChangeText={password=>this.setState({ password})}
-                   value={this.state.password}
+                   onChangeText={password=>this.setState({ user: {...this.state.user, password}})}
+                   value={this.state.user.password}
                    secureTextEntry={true}
                  
                  />
@@ -176,7 +178,8 @@ render(){
             marginHorizontal: 30
           },
           formulario:{
-            marginBottom: -40,
+            marginTop: -20,
+            marginBottom: 100,
             marginHorizontal: 30,
           },
           inputtext:{
@@ -220,7 +223,7 @@ render(){
               justifyContent:"center",
               alignItems:"center",
           },
-          Avatarplacrholder:{
+          avatarplacrholder:{
             width: 100,
             height: 100,
             backgroundColor:"#e1e2e6",
