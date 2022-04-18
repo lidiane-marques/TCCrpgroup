@@ -77,10 +77,8 @@ render(){
       return(
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View style={styles.container}>
-        <StatusBar barStyle="light-content"></StatusBar>
-        <Image source={require("../assets/logo2.png")}
-        styles={{marginTop:5, marginLeft:60}}
-        ></Image>
+       
+       
         <TouchableOpacity style={styles.voltar} onPress={() => this.props.navigation.goBack()}>
             <Icon name="chevron-left" size={32} color= "#ff4500"/>
         </TouchableOpacity>
@@ -132,13 +130,13 @@ render(){
                 <TouchableOpacity 
                 style={styles.button} 
                 onPress={this.cadastrar}>
-                <Text styles={{color:"#05A895B2"}}> Cadastrar </Text>
+                <Text style={{color:"#fff"}}> Cadastrar </Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity 
                 style={{alignSelf: "center", marginTop: 30}}
                  onPress={()=> this.props.navigation.navigate("Login")}>
-                  <Text styles={{color:"#000"}}> Já tem uma conta<Text styles={{color:"##05A895B2"}}>Faça login!</Text> </Text>
+                  <Text style={{color:"#fff"}}> Já tem uma conta  <Text style={{color:"#FB5A48"}}>Faça login!</Text> </Text>
                 </TouchableOpacity>
 
           </View>
@@ -153,7 +151,7 @@ render(){
           container:{
             flex:1,
             justifyContent:"center",
-            
+            backgroundColor:"#000"
             
           },
           titulo:{
@@ -178,8 +176,8 @@ render(){
             marginHorizontal: 30
           },
           formulario:{
-            marginTop: -20,
-            marginBottom: 100,
+            marginTop: 90,
+            marginBottom: 10,
             marginHorizontal: 30,
           },
           inputtext:{
@@ -188,15 +186,18 @@ render(){
             textTransform: "uppercase"
           },
           input:{
-            borderBottomColor:"#FB5A48",
+            borderBottomColor:"#05A895B2",
             borderBottomWidth: StyleSheet.hairlineWidth,
             height: 40,
             fontSize:15,
-            color:"#161f3d",
+            color:"#fff",
+
           },
           button:{
             height: 52,
             borderRadius: 20,
+            marginTop: 20,
+            backgroundColor:"#05A895B2",
            borderColor: "#05A895B2" ,
             alignItems:"center",
             justifyContent:"center",
@@ -204,8 +205,8 @@ render(){
           },
           voltar:{
             position:"absolute",
-            top:40,
-            left:32,
+            top:60,
+            left:16,
             width: 32,
             height:32,
             borderRadius: 16,
@@ -228,7 +229,7 @@ render(){
             height: 100,
             backgroundColor:"#e1e2e6",
             borderRadius: 50,
-            marginTop: 48,
+            marginTop: 75,
             justifyContent: "center",
             alignItems:"center",
           }

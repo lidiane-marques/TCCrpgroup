@@ -31,14 +31,15 @@ const AppContainer = createStackNavigator(
   
     default:createBottomTabNavigator(
       {
+        Perfil: {
+          screen: TelaPerfil,
+          navigationOptions:{tabBarIcon: ({tintColor})  => <Icon name="user" size ={24} color ={tintColor}/> }   
+        },
             Home: {
              screen: TelaHome,
               navigationOptions:{tabBarIcon: ({tintColor})  => <Icon name="home" size ={24} color ={tintColor}/> }   
             },
-            Perfil: {
-              screen: TelaPerfil,
-              navigationOptions:{tabBarIcon: ({tintColor})  => <Icon name="user" size ={24} color ={tintColor}/> }   
-            },
+         
             
             Post: {
               screen: TelaPost,
@@ -57,11 +58,7 @@ const AppContainer = createStackNavigator(
               screen: TelaMensagem,
               navigationOptions:{tabBarIcon: ({tintColor})  => <Icon name="message-square" size ={24} color ={tintColor}/> }   
             },
-            Configuracao: {
-              screen: TelaConfiguracao, 
-              navigationOptions:{tabBarIcon: ({tintColor})  => <Icon name="settings" size ={24} color ={tintColor}/> 
-                   }   
-              }
+           
             } ,
         {
           defaultNavigationOptions:{

@@ -1,4 +1,4 @@
-import React from 'react'
+import React , {useState}from 'react'
 import {
   StyleSheet,
   Text,
@@ -13,19 +13,21 @@ LayoutAnimation,
   Alert
 } from "react-native";
 import addPost from '../fire'
+import Fire from '../fire'
 import {Ionicons} from "@expo/vector-icons"
 import * as firebase from 'firebase'
 import moment from 'moment'
+
 
 
 posts = [
 
     {
       id: "1",
-      name: "Rogerio Gomes",
-      text: "Apresento a voces o meu novo personagem: wen-chan, Monge humano",
+      name: "lidiane",
+      text: "meu novo personagem",
       timestamp: 15691092733726,
-      avatar: require("../assets/user1.png"),
+      avatar: require("../assets/user5.png"),
       image:  require('../assets/post1.jpg')
 
     },
@@ -53,8 +55,13 @@ posts = [
 
 
 export default class TelaHome extends React.Component{
+ 
   
   renderPost = post=>{
+
+     
+
+
     return(
         <View  style={styles.feeditem}>
           <Image source={post.avatar} style={styles.avatar}/>
@@ -76,10 +83,14 @@ export default class TelaHome extends React.Component{
           </View>
         </View>
 
+
     )
   }
 render(){
-      
+  
+
+     
+
         return(
 
               <View style={styles.container}> 
@@ -109,16 +120,16 @@ render(){
  const styles= StyleSheet.create({
           container:{
             flex:1,
-           backgroundColor:"#05A895B2"
+           backgroundColor:"#20b2aa"
           },
           header:{
-            paddingTop: 20,
+            paddingTop: 25,
             alignItems:"center",
-            paddingBottom: 16,
-            backgroundColor: "#FB5A48",
+            paddingBottom: 5,
+            backgroundColor: "#fff",
             justifyContent:"center",
             borderBottomWidth:1,
-            borderBottomColor: "#ebecf4",
+            borderBottomColor: "#05A895B2",
             shadowColor: "#640C3F",
       
             shadowRadius: 15, 
@@ -133,7 +144,9 @@ render(){
           marginHorizontal: 10
         },
         feeditem:{
-          backgroundColor: "#fff",
+         // backgroundColor: "#ff7f50",
+         borderBottomWidth:1,
+         borderBottomColor: "#fff",
           borderRadius: 8,
           padding: 8,
           flexDirection:"row",
@@ -148,7 +161,7 @@ render(){
         name:{
           fontSize: 15,
            fontWeight: "500",
-           color: "#454d65"
+           color: "#fff"
 
         },
         timestamp:{
@@ -159,7 +172,7 @@ render(){
         post:{
           marginTop: 16,
           fontSize: 14,
-          color:"#838899"
+          color:"#fff"
         },
         postimage:{
           width: undefined,

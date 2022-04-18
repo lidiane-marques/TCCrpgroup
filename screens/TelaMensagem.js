@@ -11,23 +11,18 @@ LayoutAnimation,
   Keyboard,
 } from "react-native";
 import * as firebase from 'firebase'
+import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
 export default class TelaMensagem extends React.Component{
 
-  state={
-    email:"",
-    displayName: ""
-  }
-  componentDidMount(){
-    const {email, displayName} = firebase.auth().currentUser
-    this.setState({email, displayName})
-  }
+ 
   
 render(){
-  LayoutAnimation.easeInEaseOut()
-  console.log(this.state.displayName) 
+  
       return(
         <View style={styles.container}>
-          <Text>oi essa é tela de msg</Text> 
+         <Image source={require("../assets/20b2aa.png")} style={{justifyContent:"center"}}
+       
+        ></Image>
      </View>
       )
 
@@ -39,6 +34,7 @@ render(){
           container:{
             flex:1,
             justifyContent: "center",
-            alignItems: "center"
+            alignItems: "center",
+            backgroundColor:"#20b2aa"
           }
  })

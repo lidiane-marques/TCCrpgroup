@@ -13,6 +13,7 @@ import {
   Keyboard,
 } from "react-native";
 import * as firebase from 'firebase'
+import { backgroundColor, textShadowColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
 
 export default class TelaLogin extends React.Component{
   static navigationOptions={
@@ -33,12 +34,13 @@ export default class TelaLogin extends React.Component{
 render(){
   LayoutAnimation.easeInEaseOut();
       return(
+    
        
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View style={styles.container}>
-        <StatusBar barStyle="light-content"></StatusBar>
+      
         <Image source={require("../assets/logo2.png")}
-        style={{marginTop:-50, marginLeft:60}}
+        style={{marginTop:12, marginLeft:60}}
         ></Image>
           
           <View styles={styles.erromsg}>
@@ -69,11 +71,11 @@ render(){
                  />
                 </View>
                 <TouchableOpacity style={styles.button} onPress={this.entrar}>
-                  <Text styles={{color:"#05A895B2"}}> Entrar </Text>
+                  <Text style={{color:"#fff"}}> Entrar </Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={{alignSelf: "center", marginTop: 30}} 
                 onPress={() => this.props.navigation.navigate("Cadastro")}>
-                  <Text style={{color:"#000"}}>Não tem uma conta?<Text style={{color:"blue"}}>{'\n      Crie uma nova!'}</Text> </Text>
+                  <Text style={{color:"#fff"}}>Não tem uma conta?<Text style={{color:"#FB5A48"}}>{'\n      Crie uma nova!'}</Text> </Text>
                 </TouchableOpacity>
 
           </View>
@@ -86,8 +88,9 @@ render(){
 }
  const styles= StyleSheet.create({
           container:{
-            flex:1
-            
+            flex:1,
+            marginTop: 8,
+            backgroundColor:"#000"
           },
           greeting:{
             marginTop: 32,
@@ -116,14 +119,15 @@ render(){
           inputtext:{
             color: "#05A895B2",
             fontSize: 10,
-            textTransform: "uppercase"
+            textTransform: "uppercase",
+            textShadowColor: "yellow"
           },
           input:{
-            borderBottomColor:"#FB5A48",
+            borderBottomColor:"#05A895B2",
             borderBottomWidth: StyleSheet.hairlineWidth,
             height: 40,
             fontSize:15,
-            color:"#161f3d",
+            color:"#fff",
           },
           button:{
             height: 52,
